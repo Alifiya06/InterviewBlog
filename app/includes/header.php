@@ -4,7 +4,7 @@
 	</div>
 	<i class="fas fa-bars menu-toggle"></i>
 	<ul class="nav">
-		<li><a href="#">Home</a>
+		<li><a href="/interviewblog/index.php">Home</a>
 			<!--<ul style="left: 0px">
 				<li><a href="#">Landing Page</a></li>
 				<li><a href="#">Team</a></li>
@@ -16,14 +16,12 @@
 		<!-- <li><a href="#">Sign up</a></li>
 		<li><a href="#">Login</a></li>-->
 		<li>
-			<a href="#">
-				<i class="fas fa-user"></i>
-			    Username
-			    <i class="fas fa-chevron-down" style="font-size: 0.8em"></i>
+			<a href="/interviewblog/login.php">
+				Login
 		    </a>
 			<ul>
-				<li><a href="#">Dashboard</a></li>
-				<li><a href="#" class="logout">Logout</a></li>
+				<li><a href="/interviewblog/users/posts/index.php">Dashboard</a></li>
+				
 
 			</ul>
 		</li>

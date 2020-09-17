@@ -23,7 +23,7 @@
 
 <div class="auth-content">
 
-	<form action="registration.php" method="post">
+	<form autocomplete="off" action="registration.php" method="post">
 		<h2 class="form-title">Register</h2>
 
 		<!--<div class="msg success error">
@@ -31,8 +31,12 @@
 		</div>-->
 
 		<div>
-			<label>Username</label>
+			<label>Name</label>
 			<input type="text" name="name" class="text-input">
+		</div>
+		<div>
+			<label>Username</label>
+			<input type="text" name="username" class="text-input">
 		</div>
 		<div>
 			<label>Password</label>

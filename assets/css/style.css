@@ -41,6 +41,11 @@ a {
 	background: #005255;
 }
 
+.btn.btn-secondary.btn-sm{
+	padding: 0.2rem 0.2rem;
+	font-size: 0.8rem;
+}
+
 .text-input{
 	padding: 0.7rem;
 	display: block;
@@ -265,6 +270,7 @@ header .menu-toggle{
 	background: white;
 	border-radius: 5px;
 }
+
 
 .auth-content .form-title{
 	text-align: center;

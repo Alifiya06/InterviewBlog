@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-header('location:login.php');
+
 
 $conn = mysqli_connect('localhost','root');
 /*if($conn){
@@ -15,6 +15,9 @@ mysqli_select_db($conn, 'interviewblog');
 
 $name = $_POST['name'];
 $pass = $_POST['password'];
+
+//$pass = md5($pass);
+
 $year = $_POST['year'];
 $email = $_POST['email'];
 $college= $_POST['college'];
@@ -26,12 +29,12 @@ $result = mysqli_query($conn, $q);
 
 $num = mysqli_num_rows($result);
 
-if($num === 1){
+if($num > 0){
   echo "Duplicate data";
 }
 else{
   $qy = " insert into user(name,password,email,year,college,dob) values('$name','$pass', '$email', '$year' , '$college','$dob')";
   mysqli_query($conn, $qy);
 }
-
+header('location:login.php');
 ?>

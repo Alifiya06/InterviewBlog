@@ -19,7 +19,62 @@
 </head>
 <body>
 
-<?php include("app/includes/header.php") ; ?>
+<?php include("app/includes/header.php") ; 
+	$articleid =  $_GET['articleid'];
+	include 'app/database/connect.php';
+
+	$sql = "select * from article where article_id='$articleid'";
+	$result = mysqli_query($conn, $sql);
+	$arr = mysqli_fetch_array($result);
+
+	$topic = $arr['topic'];
+	$content = $arr['content'];
+?>
+
+<?php
+    include 'mpdf/vendor/autoload.php';
+
+	if(isset($_POST['submit']) and isset($_POST['articleid'])){
+		$articleid1 = $_POST['articleid'];
+		$sql1="select topic, content from article where article_id='$articleid1'";
+		$result1 = mysqli_query($conn, $sql1);
+		$array= mysqli_fetch_array($result1);
+
+		$topic1 = $array['topic'];
+		$content1 = $array['content'];
+
+		//create HTML of the data
+		/*ob_start();
+		?>
+
+		<h6>Document</h6>
+		<p> <?php echo $topic1; ?></p>
+		<p> <?php echo $content1; ?></p>
+
+		<?php
+		$body = ob_get_clean();
+
+		$body = iconv("utf-8", "utf-8//ignore", $body);*/
+
+		//create new pdf instance
+		$mpdf = new \Mpdf\Mpdf();
+
+        //create our pdf
+		$data = '';
+		$data .= '<br /><h3>Document</h3>';
+
+		$data .='<strong>Topic: </strong>'.$topic1.'<br />';
+		$data .='<strong>Experience: </strong>'.$content1.'<br />';
+
+		//write HTML
+		$mpdf->WriteHTML($data);
+
+		//output to browser
+		$mpdf->output('interview.pdf', 'D');
+
+	}
+
+?>
 
 
 
@@ -27,98 +82,24 @@
 <div class="page-wrapper ">
 
 	<!--content-->
+
 	<div class="content clearfix single">
 
         <!--main content-->
 		<div class="main-content single">
-			<h1 class="post-title">This is the title of the post</h1>
+			<h1 class="post-title"><?php echo $topic; ?></h1>
 
 			<div class="post-content">
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. 
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. 
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-				</p><p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. 
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-				</p><p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. 
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				</p>
-				<p>
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-				</p>
+				<?php
+					echo $content;
+				?>
 			</div>
 			
 		</div>
+		<form method="POST">
+			<input type="hidden" name="articleid" value="<?php  echo $articleid; ?>">
+	        <input type="submit" name="submit" class="btn btn-secondary btn-sm" value="Generate PDF">
+		</form>
         <!--main content-->
 
         <!--sidebar-->
